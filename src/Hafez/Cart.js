@@ -22,15 +22,18 @@ const Cart = () => {
       const ids = Object.keys(cart);
       for (let i = 0; i < ids.length; i++) {
         const quantity = cart[ids[i]];
-        const res = await fetch(`https://fakestoreapi.com/products/${ids[i]}`);
+        const res = await fetch(
+          `http://localhost:5000/api/v1/products/${ids[i]}`
+        );
         const json = await res.json();
+        const product = json.product;
         setCartItems((state) => {
           return {
             ...state,
-            [json.id]: {
-              product: json,
+            [product._id]: {
+              product,
               quantity,
-              price: json.price * quantity,
+              price: product.price * quantity,
             },
           };
         });
@@ -62,27 +65,18 @@ const Cart = () => {
 
   const checkoutHandler = async () => {
     try {
-      const body = {
-        cartItems: [
-          {
-            product: "62a5ff8126bb8cf59688e530",
-            quantity: 12,
-            price: 14,
-          },
-          {
-            product: "62a645061a948f01f333847e",
-            quantity: 5,
-            price: 14,
-          },
-        ],
-        shippingFee: 30,
-        paymentMethod: "Card",
-      };
-      const res = await axios.post(
-        "http://localhost:5000/api/v1/orders",
-        body,
-        { withCredentials: true }
-      );
+      const items = Object.keys(cartItems).map((id) => {
+        return {
+          product: id,
+          quantity: cartItems[id].quantity,
+          price: cartItems[id].price,
+        };
+      });
+      console.log(items);
+      const res = await axios.post("http://localhost:5000/api/v1/orders", {
+        cartItems: items,
+        paymentMethod,
+      });
     } catch {
       alert("something went wrong");
     }

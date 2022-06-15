@@ -15,10 +15,11 @@ const Navbar = ({ auth }) => {
   };
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/categories")
+    fetch("http://localhost:5000/api/v1/categories")
       .then((res) => res.json())
-      .then((json) => setCategories(json));
+      .then((json) => setCategories(json.categories));
   }, []);
+  console.log(categories);
   return (
     <nav
       className="navbar is-light"
@@ -55,11 +56,11 @@ const Navbar = ({ auth }) => {
           {categories &&
             categories.map((cat) => (
               <a
-                key={cat}
+                key={cat._id}
                 className="navbar-item"
-                onClick={() => navigate(`/${cat}`)}
+                onClick={() => navigate(`/${cat._id}`)}
               >
-                {cat.toUpperCase()}
+                {cat.name.toUpperCase()}
               </a>
             ))}
         </div>

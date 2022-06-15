@@ -9,9 +9,9 @@ const CartItem = ({ product, quantity, price }) => {
 
   const quantityHandler = (type) => {
     if (type === "incr") {
-      dispatch(incrementItem(product.id));
+      dispatch(incrementItem(product._id));
     } else {
-      dispatch(decrementItem(product.id));
+      dispatch(decrementItem(product._id));
     }
   };
 
@@ -24,7 +24,7 @@ const CartItem = ({ product, quantity, price }) => {
               <img src={product.image} style={{ maxHeight: "13rem" }} />
             </div>
             <div className="column is-two-thirds">
-              <h3 className="title">{product.title}</h3>
+              <h3 className="title">{product.name}</h3>
               <p className="title is-4 text-strong">{product.price} EGP</p>
             </div>
             <div className="column">

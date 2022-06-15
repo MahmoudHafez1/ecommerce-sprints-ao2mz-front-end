@@ -14,19 +14,13 @@ function Catalog({ products }) {
         <div className="column">
           <div className="columns is-multiline">
             {products.map((product) => (
-              <div key={product.id} className="column is-one-quarter">
+              <div key={product._id} className="column is-one-quarter">
                 <div className="card">
                   <div className="card-image is-clickable">
-                    <img src={product.image} alt={product.title} />
-                    <div className="is-bold">
-                      {product.rating.rate} /5
-                      {[...Array(parseInt(product.rating.rate))].map((e, i) => (
-                        <FaStar />
-                      ))}
-                    </div>
+                    <img src={product.gallery[0]} alt={product.name} />
                   </div>
                   <div className="card-content">
-                    <div className="label">{product.title}</div>
+                    <div className="label">{product.name}</div>
                     <div className="text">{product.description}</div>
 
                     <div className="tag is-info is-large">
@@ -37,7 +31,7 @@ function Catalog({ products }) {
                     <div className="level">
                       <button
                         className="button is-dark m-2"
-                        onClick={() => dispatch(addToCart(product.id))}
+                        onClick={() => dispatch(addToCart(product._id))}
                       >
                         Add to cart
                       </button>

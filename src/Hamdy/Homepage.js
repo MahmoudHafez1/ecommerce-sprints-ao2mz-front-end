@@ -21,29 +21,32 @@ function Nav() {
   const resetProducts = () => {
     if (params.categoryId) {
       console.log(params.categoryId);
-      fetch(`https://fakestoreapi.com/products/category/${params.categoryId}`)
+      fetch(`http://localhost:5000/api/v1/products`)
         .then((res) => res.json())
         .then((json) => {
-          setProducts(json);
-          setFilter(json);
+          const productList = json.products.filter(
+            (prod) => prod.category === params.categoryId
+          );
+          setProducts(productList);
+          setFilter(productList);
         })
         .finally(() => setLoading(""));
     } else if (params.searchQuery) {
-      fetch("https://fakestoreapi.com/products")
+      fetch("http://localhost:5000/api/v1/products")
         .then((res) => res.json())
         .then((json) => {
-          const productList = json.filter((prod) =>
-            prod.title.toLowerCase().includes(params.searchQuery.toLowerCase())
+          const productList = json.products.filter((prod) =>
+            prod.name.toLowerCase().includes(params.searchQuery.toLowerCase())
           );
           setProducts(productList);
           setFilter(productList);
         });
     } else {
-      fetch("https://fakestoreapi.com/products")
+      fetch("http://localhost:5000/api/v1/products")
         .then((res) => res.json())
         .then((json) => {
-          setProducts(json);
-          setFilter(json);
+          setProducts(json.products);
+          setFilter(json.products);
         })
         .finally(() => setLoading(""));
     }
@@ -51,7 +54,7 @@ function Nav() {
 
   const searchProducts = (keyword) => {
     const filtered = products.filter((prod) =>
-      prod.title.toLowerCase().includes(keyword.toLowerCase())
+      prod.name.toLowerCase().includes(keyword.toLowerCase())
     );
     setFilter(filtered);
   };
