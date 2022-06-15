@@ -2,6 +2,7 @@ import CartItem from "./CartItem";
 import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import LoadingScreen from "../Hamdy/LoadingScreen";
 
@@ -10,7 +11,9 @@ const Cart = () => {
 
   const [cartItems, setCartItems] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [loading, setLoading] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const getCartItems = async () => {
     try {
@@ -57,6 +60,34 @@ const Cart = () => {
     }
   }, [cartItems]);
 
+  const checkoutHandler = async () => {
+    try {
+      const body = {
+        cartItems: [
+          {
+            product: "62a5ff8126bb8cf59688e530",
+            quantity: 12,
+            price: 14,
+          },
+          {
+            product: "62a645061a948f01f333847e",
+            quantity: 5,
+            price: 14,
+          },
+        ],
+        shippingFee: 30,
+        paymentMethod: "Card",
+      };
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/orders",
+        body,
+        { withCredentials: true }
+      );
+    } catch {
+      alert("something went wrong");
+    }
+  };
+
   return (
     <>
       <LoadingScreen state={loading} />
@@ -68,7 +99,12 @@ const Cart = () => {
                 <p className="title is-4">Total Price</p>
                 <p className="title is-3">{totalPrice} EGP</p>
               </div>
-              <button className="button is-primary">Checkout</button>
+              <button
+                className="button is-primary"
+                onClick={() => setShowModal(true)}
+              >
+                Checkout
+              </button>
             </div>
           </div>
         )}
@@ -81,6 +117,58 @@ const Cart = () => {
               price={cartItems[itemId].price}
             />
           ))}
+      </div>
+      <div className={`modal ${showModal ? "is-active" : null}`}>
+        <div className="modal-background"></div>
+        <div className="modal-content">
+          <div className="card">
+            <div className="card-content is-flex is-justify-content-space-between is-align-items-center">
+              <div>
+                <p className="mb-4">Select Payment Method</p>
+                <div className="control">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="answer"
+                      value="Cash"
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      defaultChecked
+                    />
+                    Cash
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="answer"
+                      value="Card"
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    Card
+                  </label>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="button is-primary mt-4 mr-3"
+                  onClick={checkoutHandler}
+                >
+                  Checkout
+                </button>
+                <button
+                  className="button is-danger mt-4"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          className="modal-close is-large"
+          aria-label="close"
+          onClick={() => setShowModal(false)}
+        ></button>
       </div>
     </>
   );

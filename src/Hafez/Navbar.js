@@ -3,7 +3,7 @@ import { BsCart4 } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ auth }) => {
   const [categories, setCategories] = useState();
   const [searchQ, setSearchQ] = useState();
   const navigate = useNavigate();
@@ -90,7 +90,18 @@ const Navbar = () => {
           </div>
           <div className="navbar-item">
             <VscAccount size={25} />
-            <span style={{ marginLeft: "0.5rem" }}>My Account</span>
+            <span
+              style={{ marginLeft: "0.5rem", cursor: "pointer" }}
+              onClick={() => {
+                if (auth) {
+                  navigate("/profile");
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              {auth ? `My account` : `Login`}
+            </span>
           </div>
         </div>
       </div>
