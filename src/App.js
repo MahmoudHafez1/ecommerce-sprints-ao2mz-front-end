@@ -6,6 +6,7 @@ import Homepage from "./Hamdy/Homepage";
 import Login from "./Hamdy/Login";
 import Navbar from "./Hafez/Navbar";
 import store from "./Hafez/store/store";
+import './App.css'
 
 function App() {
   return (

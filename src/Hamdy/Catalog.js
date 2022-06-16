@@ -26,8 +26,8 @@ function Catalog({ products }) {
                     </div>
                   </div>
                   <div className="card-content">
-                    <div className="label">{product.title}</div>
-                    <div className="text">{product.description}</div>
+                    <h4 className="label">{product.title}</h4>
+                    <p className="text product--description">{product.description}</p>
 
                     <div className="tag is-info is-large">
                       {product.price} EGP

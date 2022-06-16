@@ -6,9 +6,9 @@
 #### Hamdy : Added search function
 #### Hamdy : Added Category filter
 #### Hamdy : Currently working on filters for search result 
-#### Hamdy : Currently working on each and everyfilter
+#### Hamdy : Currently working on each and every filter
 
-### Dependencis
+### Dependencies
 # Hamdy : bulma
 # Hamdy : react-icons
 # Hamdy : 

@@ -50,7 +50,7 @@ const Navbar = () => {
             className="navbar-item"
             onClick={() => navigate(`/homepage`)}
           >
-            All PROUDCTS
+            All PRODUCTS
           </a>
           {categories &&
             categories.map((cat) => (
