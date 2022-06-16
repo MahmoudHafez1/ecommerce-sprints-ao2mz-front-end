@@ -41,7 +41,9 @@ function Product(props) {
             <h2 className="info--title">{product.name}</h2>
             <p className="info--description">{product.description}</p>
             <div className="btns">
-              <p className="product--price">{product.price} EGP</p>
+              <p className="product--price">
+                {Intl.NumberFormat("en-US").format(product.price)} EGP
+              </p>
               <button
                 className="btn btn--cart ml-2"
                 onClick={() => addToCartHandler(product._id)}

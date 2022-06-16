@@ -41,7 +41,8 @@ function Catalog({ products }) {
                     <div className="title is-5">{product.name}</div>
 
                     <p className="title is-4">
-                      <b>{product.price}</b> EGP
+                      <b>{Intl.NumberFormat("en-US").format(product.price)}</b>{" "}
+                      EGP
                     </p>
                     <button
                       className="btn btn--cart ml-2"

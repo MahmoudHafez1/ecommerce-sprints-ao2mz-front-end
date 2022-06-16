@@ -105,7 +105,9 @@ const Cart = ({ auth }) => {
             <div className="card-content is-flex is-justify-content-space-between is-align-items-center">
               <div>
                 <p className="title is-4">Total Price</p>
-                <p className="title is-3">{totalPrice} EGP</p>
+                <p className="title is-3">
+                  {Intl.NumberFormat("en-US").format(totalPrice)} EGP
+                </p>
               </div>
               <button
                 className="button is-primary is-large is-dark"

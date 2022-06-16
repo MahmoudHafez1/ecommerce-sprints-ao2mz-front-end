@@ -28,7 +28,9 @@ const CartItem = ({ product, quantity, price }) => {
             </div>
             <div className="column is-two-thirds">
               <h3 className="title">{product.name}</h3>
-              <p className="title is-4 text-strong">{product.price} EGP</p>
+              <p className="title is-4 text-strong">
+                {Intl.NumberFormat("en-US").format(product.price)} EGP
+              </p>
             </div>
             <div className="column">
               <div className="columns is-vcentered is-flex-direction-column">
