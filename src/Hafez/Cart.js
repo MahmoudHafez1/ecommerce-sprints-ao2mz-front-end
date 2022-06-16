@@ -79,9 +79,11 @@ const Cart = ({ auth }) => {
         {
           cartItems: items,
           paymentMethod,
+          shippingFee: 20,
         },
         { withCredentials: true }
       );
+      console.log(res);
     } catch {
       alert("something went wrong");
     }

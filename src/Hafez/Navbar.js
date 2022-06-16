@@ -3,11 +3,26 @@ import { BsCart4 } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { BiLogIn } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = ({ auth, authHandler }) => {
   const [categories, setCategories] = useState();
   const [searchQ, setSearchQ] = useState();
   const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/v1/auth/logout", {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        authHandler("login");
+        navigate("/homepage");
+      }
+    } catch {
+      alert("something went wrong");
+    }
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/categories")
@@ -103,10 +118,7 @@ const Navbar = ({ auth, authHandler }) => {
                 <BiLogIn size={25} />
                 <span
                   style={{ marginLeft: "0.5rem", cursor: "pointer" }}
-                  onClick={() => {
-                    authHandler("logout");
-                    navigate("/homepage");
-                  }}
+                  onClick={logoutHandler}
                 >
                   Log out
                 </span>
