@@ -1,7 +1,7 @@
 import React from "react";
 import Catalog from "./Catalog";
 import SearchBar from "./SearchBar";
-import Filter from "./Filters";
+import Sort from "./Sort";
 import "bulma/css/bulma.min.css";
 import Loading from "./LoadingScreen";
 import { useParams } from "react-router-dom";
@@ -70,8 +70,7 @@ function Nav() {
   return (
     <>
       <Loading state={loading} />
-      <SearchBar searchProducts={searchProducts} />
-      <Filter sortProducts={sortProducts} />
+      <Sort sortProducts={sortProducts} />
       <Catalog products={filter} />
     </>
   );

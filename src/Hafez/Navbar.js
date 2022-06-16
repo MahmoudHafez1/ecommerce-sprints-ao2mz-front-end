@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { BsCart4 } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
+import { BiLogIn } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ auth }) => {
+const Navbar = ({ auth, authHandler }) => {
   const [categories, setCategories] = useState();
   const [searchQ, setSearchQ] = useState();
   const navigate = useNavigate();
-
-  const Search = () => {
-    //searchQ === ""
-    //  ? setFilter(products)
-    //: setFilter(products.filter((item) => item.title.indexOf(searchQ) !== -1));
-  };
 
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/categories")
@@ -103,6 +98,20 @@ const Navbar = ({ auth }) => {
             >
               {auth ? `My account` : `Login`}
             </span>
+            {auth && (
+              <div className="navbar-item">
+                <BiLogIn size={25} />
+                <span
+                  style={{ marginLeft: "0.5rem", cursor: "pointer" }}
+                  onClick={() => {
+                    authHandler("logout");
+                    navigate("/homepage");
+                  }}
+                >
+                  Log out
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

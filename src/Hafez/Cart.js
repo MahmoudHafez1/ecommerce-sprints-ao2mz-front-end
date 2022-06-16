@@ -1,13 +1,14 @@
 import CartItem from "./CartItem";
-import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import LoadingScreen from "../Hamdy/LoadingScreen";
 
-const Cart = () => {
+const Cart = ({ auth }) => {
   const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const [cartItems, setCartItems] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
@@ -73,10 +74,14 @@ const Cart = () => {
         };
       });
       console.log(items);
-      const res = await axios.post("http://localhost:5000/api/v1/orders", {
-        cartItems: items,
-        paymentMethod,
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/orders",
+        {
+          cartItems: items,
+          paymentMethod,
+        },
+        { withCredentials: true }
+      );
     } catch {
       alert("something went wrong");
     }
@@ -94,8 +99,8 @@ const Cart = () => {
                 <p className="title is-3">{totalPrice} EGP</p>
               </div>
               <button
-                className="button is-primary"
-                onClick={() => setShowModal(true)}
+                className="button is-primary is-large is-dark"
+                onClick={() => (auth ? setShowModal(true) : navigate("/login"))}
               >
                 Checkout
               </button>

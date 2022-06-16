@@ -20,12 +20,16 @@ export default function Login({ authHandler }) {
   //////////////////////////////////////////////////////////////////////////////////////////
   const LoginClick = async (e) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/login", {
-        email: user.email,
-        password: user.password,
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/auth/login",
+        {
+          email: user.email,
+          password: user.password,
+        },
+        { withCredentials: true }
+      );
       if (res.status === 200) {
-        authHandler(res.data.user);
+        authHandler("login", res.data.user);
         navigate("/homepage");
       } else {
         alert("email or password is not correct");
@@ -34,6 +38,7 @@ export default function Login({ authHandler }) {
       alert("email or password is not correct");
     }
   };
+
   ///////////////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -78,7 +83,10 @@ export default function Login({ authHandler }) {
                   </div>
                 </div>
                 <div className="field p-2 has-text-centered">
-                  <button onClick={LoginClick} className="button is-info">
+                  <button
+                    onClick={LoginClick}
+                    className="button is-info is-fullwidth"
+                  >
                     Login
                   </button>
                 </div>

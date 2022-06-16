@@ -21,7 +21,10 @@ const CartItem = ({ product, quantity, price }) => {
         <div className="content">
           <div className="columns is-vcentered">
             <div className="column">
-              <img src={product.image} style={{ maxHeight: "13rem" }} />
+              <img
+                src={`http://localhost:5000/${product.gallery[0]}`}
+                style={{ maxHeight: "13rem" }}
+              />
             </div>
             <div className="column is-two-thirds">
               <h3 className="title">{product.name}</h3>
