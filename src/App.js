@@ -35,10 +35,10 @@ function App() {
           <Navbar auth={auth} authHandler={authHandler} />
           <Routes>
             <Route path="/cart" element={<Cart auth={auth} />} />
-            <Route path="/homepage" element={<Homepage />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/:categoryId" element={<Homepage />} />
             <Route path="/search/:searchQuery" element={<Homepage />} />
-            <Route path="/profile" element={<Orders />} />
+
             <Route path="/products/:productId" element={<Product />} />
             <Route
               path="/login"

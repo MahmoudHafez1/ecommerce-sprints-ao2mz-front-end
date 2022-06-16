@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DECREMENT, INCREMENT } from "../actions/cart";
+import { ADD_TO_CART, CLEAR, DECREMENT, INCREMENT } from "../actions/cart";
 
 const initialState = {};
 
@@ -30,6 +30,8 @@ export default (state = initialState, action) => {
           [action.itemId]: state[action.itemId] - 1,
         };
       }
+    case CLEAR:
+      return {};
     default:
       return state;
   }

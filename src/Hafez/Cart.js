@@ -3,12 +3,15 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+import { clear } from "./store/actions/cart";
 import LoadingScreen from "../Hamdy/LoadingScreen";
 
 const Cart = ({ auth }) => {
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [cartItems, setCartItems] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
@@ -83,7 +86,11 @@ const Cart = ({ auth }) => {
         },
         { withCredentials: true }
       );
-      console.log(res);
+      if (res.status === 201) {
+        alert("your order has been sent successfully");
+        dispatch(clear());
+        navigate("/");
+      }
     } catch {
       alert("something went wrong");
     }

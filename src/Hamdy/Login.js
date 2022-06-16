@@ -34,7 +34,7 @@ export default function Login({ authHandler }) {
       );
       if (res.status === 200) {
         authHandler("login", res.data.user);
-        navigate("/homepage");
+        navigate("/");
       } else {
         alert("email or password is not correct");
       }
@@ -60,7 +60,7 @@ export default function Login({ authHandler }) {
       );
       if (res.status === 201) {
         authHandler("login", res.data.user);
-        navigate("/homepage");
+        navigate("/");
       } else {
         alert("Email is not valid");
       }

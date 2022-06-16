@@ -1,6 +1,7 @@
 export const ADD_TO_CART = "ADD_TO_CART";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
+export const CLEAR = "CLEAR";
 
 export const addToCart = (id, quantity = 1) => {
   return {
@@ -23,5 +24,11 @@ export const decrementItem = (id) => {
   return {
     type: DECREMENT,
     itemId: id,
+  };
+};
+
+export const clear = () => {
+  return {
+    type: CLEAR,
   };
 };

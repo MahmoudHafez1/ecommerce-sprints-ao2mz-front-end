@@ -17,7 +17,7 @@ const Navbar = ({ auth, authHandler }) => {
       });
       if (res.status === 200) {
         authHandler("login");
-        navigate("/homepage");
+        navigate("/");
       }
     } catch {
       alert("something went wrong");
@@ -56,11 +56,7 @@ const Navbar = ({ auth, authHandler }) => {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a
-            key={"all"}
-            className="navbar-item"
-            onClick={() => navigate(`/homepage`)}
-          >
+          <a key={"all"} className="navbar-item" onClick={() => navigate(`/`)}>
             All PROUDCTS
           </a>
           {categories &&
@@ -104,9 +100,7 @@ const Navbar = ({ auth, authHandler }) => {
             <span
               style={{ marginLeft: "0.5rem", cursor: "pointer" }}
               onClick={() => {
-                if (auth) {
-                  navigate("/profile");
-                } else {
+                if (!auth) {
                   navigate("/login");
                 }
               }}
