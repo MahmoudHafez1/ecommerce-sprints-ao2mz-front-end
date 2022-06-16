@@ -40,7 +40,8 @@ function Nav() {
           );
           setProducts(productList);
           setFilter(productList);
-        });
+        })
+        .finally(() => setLoading(""));
     } else {
       fetch("http://localhost:5000/api/v1/products")
         .then((res) => res.json())
