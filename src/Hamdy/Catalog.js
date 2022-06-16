@@ -1,12 +1,14 @@
 import React from "react";
 import "bulma/css/bulma.min.css";
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { addToCart } from "../Hafez/store/actions/cart";
 
+
 function Catalog({ products }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="main m-2 p-2">
@@ -17,7 +19,11 @@ function Catalog({ products }) {
               <div key={product.id} className="column is-one-quarter">
                 <div className="card">
                   <div className="card-image is-clickable">
-                    <img src={product.image} alt={product.title} />
+                    <img 
+                      src={product.image} 
+                      alt={product.title}
+                      onClick={(() => navigate(`/product/${product.id}`))} 
+                    />
                     <div className="is-bold">
                       {product.rating.rate} /5
                       {[...Array(parseInt(product.rating.rate))].map((e, i) => (

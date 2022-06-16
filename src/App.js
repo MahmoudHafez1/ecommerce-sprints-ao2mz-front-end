@@ -7,10 +7,11 @@ import Login from "./Hamdy/Login";
 import Navbar from "./Hafez/Navbar";
 import store from "./Hafez/store/store";
 import './App.css'
+import Product from "./Hamdy/Product";
 
 function App() {
   return (
-    <div>
+    <main className="main">
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
@@ -20,10 +21,11 @@ function App() {
             <Route path="/:categoryId" element={<Homepage />} />
             <Route path="/search/:searchQuery" element={<Homepage />} />
             <Route path="/" element={<Login />} />
+            <Route path="/product/:productId" element={<Product />} />
           </Routes>
         </BrowserRouter>
       </Provider>
-    </div>
+    </main>
   );
 }
 
